@@ -1,72 +1,77 @@
-# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0 ( https://apimatic.io ).
+# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0
+# ( https://apimatic.io ).
 
 module Raas
+  # Represents the request to place an order
   class CreateOrderRequestModel < BaseModel
-    # Account Identifier
+    # The account identifier
     # @return [String]
     attr_accessor :account_identifier
 
-    # Amount
+    # The order amount
     # @return [Float]
     attr_accessor :amount
 
-    # Customer Identifier
+    # The customer identifier
     # @return [String]
     attr_accessor :customer_identifier
 
-    # Send Email
+    # Indicates whether we should deliver this reward via email
     # @return [Boolean]
     attr_accessor :send_email
 
-    # UTID
+    # The UTID
     # @return [String]
     attr_accessor :utid
 
-    # Campaign
+    # An optional campaign identifier
     # @return [String]
     attr_accessor :campaign
 
-    # Email Subject
+    # The subject of the gift email
     # @return [String]
     attr_accessor :email_subject
 
-    # External Reference ID
+    # An optional external reference id
     # @return [String]
     attr_accessor :external_ref_id
 
-    # Email Message
+    # The gift message in the email
     # @return [String]
     attr_accessor :message
 
-    # Recipient
+    # The recipient's information
     # @return [NameEmailModel]
     attr_accessor :recipient
 
-    # Sender
+    # Optional sender information
     # @return [NameEmailModel]
     attr_accessor :sender
 
-    # Notes
+    # Optional notes (not displayed to customer)
     # @return [String]
     attr_accessor :notes
 
-    # A mapping from model property names to API property names
+    # The email template identifier
+    # @return [String]
+    attr_accessor :etid
+
+    # A mapping from model property names to API property names.
     def self.names
-      if @_hash.nil?
-        @_hash = {}
-        @_hash["account_identifier"] = "accountIdentifier"
-        @_hash["amount"] = "amount"
-        @_hash["customer_identifier"] = "customerIdentifier"
-        @_hash["send_email"] = "sendEmail"
-        @_hash["utid"] = "utid"
-        @_hash["campaign"] = "campaign"
-        @_hash["email_subject"] = "emailSubject"
-        @_hash["external_ref_id"] = "externalRefID"
-        @_hash["message"] = "message"
-        @_hash["recipient"] = "recipient"
-        @_hash["sender"] = "sender"
-        @_hash["notes"] = "notes"
-      end
+      @_hash = {} if @_hash.nil?
+      @_hash['account_identifier'] = 'accountIdentifier'
+      @_hash['amount'] = 'amount'
+      @_hash['customer_identifier'] = 'customerIdentifier'
+      @_hash['send_email'] = 'sendEmail'
+      @_hash['utid'] = 'utid'
+      @_hash['campaign'] = 'campaign'
+      @_hash['email_subject'] = 'emailSubject'
+      @_hash['external_ref_id'] = 'externalRefID'
+      @_hash['message'] = 'message'
+      @_hash['recipient'] = 'recipient'
+      @_hash['sender'] = 'sender'
+      @_hash['notes'] = 'notes'
+      @_hash['etid'] = 'etid'
       @_hash
     end
 
@@ -81,7 +86,8 @@ module Raas
                    message = nil,
                    recipient = nil,
                    sender = nil,
-                   notes = nil)
+                   notes = nil,
+                   etid = nil)
       @account_identifier = account_identifier
       @amount = amount
       @customer_identifier = customer_identifier
@@ -94,13 +100,14 @@ module Raas
       @recipient = recipient
       @sender = sender
       @notes = notes
+      @etid = etid
     end
 
-    # Creates an instance of the object from a hash
+    # Creates an instance of the object from a hash.
     def self.from_hash(hash)
       return nil unless hash
 
-      # Extract variables from the hash
+      # Extract variables from the hash.
       account_identifier = hash['accountIdentifier']
       amount = hash['amount']
       customer_identifier = hash['customerIdentifier']
@@ -110,11 +117,13 @@ module Raas
       email_subject = hash['emailSubject']
       external_ref_id = hash['externalRefID']
       message = hash['message']
-      recipient = NameEmailModel.from_hash(hash['recipient']) if hash['recipient']
+      recipient = NameEmailModel.from_hash(hash['recipient']) if
+        hash['recipient']
       sender = NameEmailModel.from_hash(hash['sender']) if hash['sender']
       notes = hash['notes']
+      etid = hash['etid']
 
-      # Create object from extracted values
+      # Create object from extracted values.
       CreateOrderRequestModel.new(account_identifier,
                                   amount,
                                   customer_identifier,
@@ -126,7 +135,8 @@ module Raas
                                   message,
                                   recipient,
                                   sender,
-                                  notes)
+                                  notes,
+                                  etid)
     end
   end
 end

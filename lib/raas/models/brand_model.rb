@@ -1,68 +1,68 @@
-# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0 ( https://apimatic.io ).
+# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0
+# ( https://apimatic.io ).
 
 require 'date'
 module Raas
+  # Represents a Brand
   class BrandModel < BaseModel
-    # Brand Key
+    # The brand key
     # @return [String]
     attr_accessor :brand_key
 
-    # Brand Name
+    # The brand name
     # @return [String]
     attr_accessor :brand_name
 
-    # Disclaimer
+    # The brand's disclaimer
     # @return [String]
     attr_accessor :disclaimer
 
-    # Description
+    # The brand's description
     # @return [String]
     attr_accessor :description
 
-    # Short Description
+    # The brand's short description
     # @return [String]
     attr_accessor :short_description
 
-    # Terms
+    # The brand's terms
     # @return [String]
     attr_accessor :terms
 
-    # Date Created
+    # The date the brand was created
     # @return [DateTime]
     attr_accessor :created_date
 
-    # Last Updated
+    # The date the brand was last updated
     # @return [DateTime]
     attr_accessor :last_update_date
 
-    # Image URLs
+    # A map of Image URLs
     # @return [Array<String, String>]
     attr_accessor :image_urls
 
-    # Status
+    # The brand's status
     # @return [String]
     attr_accessor :status
 
-    # Items
+    # An array of Item objects
     # @return [List of ItemModel]
     attr_accessor :items
 
-    # A mapping from model property names to API property names
+    # A mapping from model property names to API property names.
     def self.names
-      if @_hash.nil?
-        @_hash = {}
-        @_hash["brand_key"] = "brandKey"
-        @_hash["brand_name"] = "brandName"
-        @_hash["disclaimer"] = "disclaimer"
-        @_hash["description"] = "description"
-        @_hash["short_description"] = "shortDescription"
-        @_hash["terms"] = "terms"
-        @_hash["created_date"] = "createdDate"
-        @_hash["last_update_date"] = "lastUpdateDate"
-        @_hash["image_urls"] = "imageUrls"
-        @_hash["status"] = "status"
-        @_hash["items"] = "items"
-      end
+      @_hash = {} if @_hash.nil?
+      @_hash['brand_key'] = 'brandKey'
+      @_hash['brand_name'] = 'brandName'
+      @_hash['disclaimer'] = 'disclaimer'
+      @_hash['description'] = 'description'
+      @_hash['short_description'] = 'shortDescription'
+      @_hash['terms'] = 'terms'
+      @_hash['created_date'] = 'createdDate'
+      @_hash['last_update_date'] = 'lastUpdateDate'
+      @_hash['image_urls'] = 'imageUrls'
+      @_hash['status'] = 'status'
+      @_hash['items'] = 'items'
       @_hash
     end
 
@@ -90,29 +90,33 @@ module Raas
       @items = items
     end
 
-    # Creates an instance of the object from a hash
+    # Creates an instance of the object from a hash.
     def self.from_hash(hash)
       return nil unless hash
 
-      # Extract variables from the hash
+      # Extract variables from the hash.
       brand_key = hash['brandKey']
       brand_name = hash['brandName']
       disclaimer = hash['disclaimer']
       description = hash['description']
       short_description = hash['shortDescription']
       terms = hash['terms']
-      created_date = DateTime.rfc3339(hash['createdDate']) if hash['createdDate']
-      last_update_date = DateTime.rfc3339(hash['lastUpdateDate']) if hash['lastUpdateDate']
+      created_date = DateTime.rfc3339(hash['createdDate']) if
+        hash['createdDate']
+      last_update_date = DateTime.rfc3339(hash['lastUpdateDate']) if
+        hash['lastUpdateDate']
       image_urls = hash['imageUrls']
       status = hash['status']
       # Parameter is an array, so we need to iterate through it
       items = nil
-      if hash['items'] != nil
-        items = Array.new
-        hash['items'].each{|structure| items << (ItemModel.from_hash(structure) if structure)}
+      unless hash['items'].nil?
+        items = []
+        hash['items'].each do |structure|
+          items << (ItemModel.from_hash(structure) if structure)
+        end
       end
 
-      # Create object from extracted values
+      # Create object from extracted values.
       BrandModel.new(brand_key,
                      brand_name,
                      disclaimer,

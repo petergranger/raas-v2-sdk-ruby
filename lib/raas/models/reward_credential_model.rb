@@ -1,27 +1,27 @@
-# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0 ( https://apimatic.io ).
+# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0
+# ( https://apimatic.io ).
 
 module Raas
+  # Represents a Reward Credential
   class RewardCredentialModel < BaseModel
-    # Credential Label
+    # The label of the credential
     # @return [String]
     attr_accessor :label
 
-    # Credential Value
+    # The actual credential
     # @return [String]
     attr_accessor :value
 
-    # Credential Type
+    # The type of the credential
     # @return [String]
     attr_accessor :type
 
-    # A mapping from model property names to API property names
+    # A mapping from model property names to API property names.
     def self.names
-      if @_hash.nil?
-        @_hash = {}
-        @_hash["label"] = "label"
-        @_hash["value"] = "value"
-        @_hash["type"] = "type"
-      end
+      @_hash = {} if @_hash.nil?
+      @_hash['label'] = 'label'
+      @_hash['value'] = 'value'
+      @_hash['type'] = 'type'
       @_hash
     end
 
@@ -33,16 +33,16 @@ module Raas
       @type = type
     end
 
-    # Creates an instance of the object from a hash
+    # Creates an instance of the object from a hash.
     def self.from_hash(hash)
       return nil unless hash
 
-      # Extract variables from the hash
+      # Extract variables from the hash.
       label = hash['label']
       value = hash['value']
       type = hash['type']
 
-      # Create object from extracted values
+      # Create object from extracted values.
       RewardCredentialModel.new(label,
                                 value,
                                 type)

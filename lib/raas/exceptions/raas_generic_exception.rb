@@ -1,7 +1,9 @@
-# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0 ( https://apimatic.io ).
+# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0
+# ( https://apimatic.io ).
 
 require 'date'
 module Raas
+  # RaaS API Generic Exception
   class RaasGenericException < APIException
     # Request timestamp
     # @return [DateTime]
@@ -28,19 +30,17 @@ module Raas
     attr_accessor :message
 
     # The constructor.
-    # @param [String] The reason for raising an exception
+    # @param [String] The reason for raising an exception.
     # @param [HttpContext] The HttpContext of the API call.
     def initialize(reason, context)
       super(reason, context)
-      begin
-        hash = APIHelper.json_deserialize(@context.response.raw_body)
-        unbox(hash)
-      rescue TypeError
-      end
+      hash = APIHelper.json_deserialize(@context.response.raw_body)
+      unbox(hash)
     end
 
     # Populates this object by extracting properties from a hash.
-    # @param [Hash] The deserialized response sent by the server in the response body.
+    # @param [Hash] The deserialized response sent by the server in the
+    # response body.
     def unbox(hash)
       @timestamp = DateTime.rfc3339(hash['timestamp']) if hash['timestamp']
       @request_id = hash['requestId']

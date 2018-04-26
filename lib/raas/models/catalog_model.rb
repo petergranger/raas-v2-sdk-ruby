@@ -1,6 +1,8 @@
-# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0 ( https://apimatic.io ).
+# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0
+# ( https://apimatic.io ).
 
 module Raas
+  # Represents a Catalog
   class CatalogModel < BaseModel
     # The name of your catalog
     # @return [String]
@@ -10,13 +12,11 @@ module Raas
     # @return [List of BrandModel]
     attr_accessor :brands
 
-    # A mapping from model property names to API property names
+    # A mapping from model property names to API property names.
     def self.names
-      if @_hash.nil?
-        @_hash = {}
-        @_hash["catalog_name"] = "catalogName"
-        @_hash["brands"] = "brands"
-      end
+      @_hash = {} if @_hash.nil?
+      @_hash['catalog_name'] = 'catalogName'
+      @_hash['brands'] = 'brands'
       @_hash
     end
 
@@ -26,20 +26,22 @@ module Raas
       @brands = brands
     end
 
-    # Creates an instance of the object from a hash
+    # Creates an instance of the object from a hash.
     def self.from_hash(hash)
       return nil unless hash
 
-      # Extract variables from the hash
+      # Extract variables from the hash.
       catalog_name = hash['catalogName']
       # Parameter is an array, so we need to iterate through it
       brands = nil
-      if hash['brands'] != nil
-        brands = Array.new
-        hash['brands'].each{|structure| brands << (BrandModel.from_hash(structure) if structure)}
+      unless hash['brands'].nil?
+        brands = []
+        hash['brands'].each do |structure|
+          brands << (BrandModel.from_hash(structure) if structure)
+        end
       end
 
-      # Create object from extracted values
+      # Create object from extracted values.
       CatalogModel.new(catalog_name,
                        brands)
     end

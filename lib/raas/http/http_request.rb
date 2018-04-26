@@ -1,8 +1,11 @@
-# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0 ( https://apimatic.io ).
+# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0
+# ( https://apimatic.io ).
 
 module Raas
+  # Represents a single Http Request.
   class HttpRequest
-    attr_accessor :http_method, :query_url, :headers, :parameters, :username, :password
+    attr_accessor :http_method, :query_url, :headers,
+                  :parameters, :username, :password
 
     # The constructor.
     # @param [HttpMethodEnum] The HTTP method.
@@ -37,7 +40,8 @@ module Raas
     # @param [String] The name of the query parameter.
     # @param [String] The value of the query parameter.
     def add_query_parameter(name, value)
-      @query_url = APIHelper.append_url_with_query_parameters(@query_url, name => value)
+      @query_url = APIHelper.append_url_with_query_parameters(@query_url,
+                                                              name => value)
       @query_url = APIHelper.clean_url(@query_url)
     end
   end

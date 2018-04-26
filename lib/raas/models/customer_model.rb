@@ -1,38 +1,38 @@
-# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0 ( https://apimatic.io ).
+# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0
+# ( https://apimatic.io ).
 
 require 'date'
 module Raas
+  # Represents a Customer/Group
   class CustomerModel < BaseModel
-    # Customer Identifier
+    # The customer identifier
     # @return [String]
     attr_accessor :customer_identifier
 
-    # Display Name
+    # The display name
     # @return [String]
     attr_accessor :display_name
 
-    # Status
+    # The status of the customer
     # @return [String]
     attr_accessor :status
 
-    # Date Created
+    # The date the customer was created
     # @return [DateTime]
     attr_accessor :created_at
 
-    # Accounts
+    # An array of AccountSummary objects
     # @return [List of AccountSummaryModel]
     attr_accessor :accounts
 
-    # A mapping from model property names to API property names
+    # A mapping from model property names to API property names.
     def self.names
-      if @_hash.nil?
-        @_hash = {}
-        @_hash["customer_identifier"] = "customerIdentifier"
-        @_hash["display_name"] = "displayName"
-        @_hash["status"] = "status"
-        @_hash["created_at"] = "createdAt"
-        @_hash["accounts"] = "accounts"
-      end
+      @_hash = {} if @_hash.nil?
+      @_hash['customer_identifier'] = 'customerIdentifier'
+      @_hash['display_name'] = 'displayName'
+      @_hash['status'] = 'status'
+      @_hash['created_at'] = 'createdAt'
+      @_hash['accounts'] = 'accounts'
       @_hash
     end
 
@@ -48,23 +48,25 @@ module Raas
       @accounts = accounts
     end
 
-    # Creates an instance of the object from a hash
+    # Creates an instance of the object from a hash.
     def self.from_hash(hash)
       return nil unless hash
 
-      # Extract variables from the hash
+      # Extract variables from the hash.
       customer_identifier = hash['customerIdentifier']
       display_name = hash['displayName']
       status = hash['status']
       created_at = DateTime.rfc3339(hash['createdAt']) if hash['createdAt']
       # Parameter is an array, so we need to iterate through it
       accounts = nil
-      if hash['accounts'] != nil
-        accounts = Array.new
-        hash['accounts'].each{|structure| accounts << (AccountSummaryModel.from_hash(structure) if structure)}
+      unless hash['accounts'].nil?
+        accounts = []
+        hash['accounts'].each do |structure|
+          accounts << (AccountSummaryModel.from_hash(structure) if structure)
+        end
       end
 
-      # Create object from extracted values
+      # Create object from extracted values.
       CustomerModel.new(customer_identifier,
                         display_name,
                         status,

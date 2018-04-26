@@ -1,18 +1,22 @@
-# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0 ( https://apimatic.io ).
+# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0
+# ( https://apimatic.io ).
 
 module Raas
+  # API utility class
   class APIHelper
-    # Serializes an array parameter (creates key value pairs)
-    # @param [String] The name of the parameter
-    # @param [Array] The value of the parameter
-    # @param [String] The format of the serialization
+    # Serializes an array parameter (creates key value pairs).
+    # @param [String] The name of the parameter.
+    # @param [Array] The value of the parameter.
+    # @param [String] The format of the serialization.
     def self.serialize_array(key, array, formatting: 'indexed')
       tuples = []
 
       if formatting == 'unindexed'
         tuples += array.map { |element| ["#{key}[]", element] }
       elsif formatting == 'indexed'
-        tuples += array.map.with_index { |element, index| ["#{key}[#{index}]", element] }
+        tuples += array.map.with_index do |element, index|
+          ["#{key}[#{index}]", element]
+        end
       elsif formatting == 'plain'
         tuples += array.map { |element| [key, element] }
       else
@@ -21,17 +25,21 @@ module Raas
       tuples
     end
 
-    # Replaces template parameters in the given url
-    # @param [String] The query string builder to replace the template parameters
-    # @param [Hash] The parameters to replace in the url
+    # Replaces template parameters in the given url.
+    # @param [String] The query string builder to replace the template
+    # parameters.
+    # @param [Hash] The parameters to replace in the url.
     def self.append_url_with_template_parameters(query_builder, parameters)
       # perform parameter validation
-      raise ArgumentError, 'Given value for parameter \"query_builder\" is invalid.' unless query_builder.instance_of? String
+      unless query_builder.instance_of? String
+        raise ArgumentError, 'Given value for parameter \"query_builder\" is
+          invalid.'
+      end
 
-      # return if there are no parameters to replace
+      # Return if there are no parameters to replace.
       return query_builder if parameters.nil?
 
-      # iterate and append parameters
+      # Iterate and append parameters.
       parameters.each do |key, value|
         replace_value = ''
 
@@ -44,38 +52,50 @@ module Raas
           replace_value = CGI.escape(value.to_s)
         end
 
-        # find the template parameter and replace it with its value
+        # Find the template parameter and replace it with its value.
         query_builder = query_builder.gsub('{' + key.to_s + '}', replace_value)
       end
       query_builder
     end
 
-    # Appends the given set of parameters to the given query string
-    # @param [String] The query string builder to add the query parameters to
-    # @param [Hash] The parameters to append
-    # @param [String] The format of array parameter serialization
-    def self.append_url_with_query_parameters(query_builder, parameters, array_serialization: 'indexed')
-      # perform parameter validation
-      raise ArgumentError, 'Given value for parameter \"query_builder\" is invalid.' unless query_builder.instance_of? String
+    # Appends the given set of parameters to the given query string.
+    # @param [String] The query string builder to add the query parameters to.
+    # @param [Hash] The parameters to append.
+    # @param [String] The format of array parameter serialization.
+    def self.append_url_with_query_parameters(query_builder, parameters,
+                                              array_serialization: 'indexed')
+      # Perform parameter validation.
+      unless query_builder.instance_of? String
+        raise ArgumentError, 'Given value for parameter \"query_builder\"
+          is invalid.'
+      end
 
-      # return if there are no parameters to replace
+      # Return if there are no parameters to replace.
       return query_builder if parameters.nil?
 
       parameters.each do |key, value|
-        seperator = (query_builder.include? '?') ? '&' : '?'
-        if not value.nil?
+        seperator = query_builder.include?('?') ? '&' : '?'
+        unless value.nil?
           if value.instance_of? Array
             value.compact!
-            if array_serialization == 'csv'
-              query_builder += "#{seperator}#{key}=#{value.map { |element| CGI.escape(element.to_s) }.join(',')}"
-            elsif array_serialization == 'psv'
-              query_builder += "#{seperator}#{key}=#{value.map { |element| CGI.escape(element.to_s) }.join('|')}"
-            elsif array_serialization == 'tsv'
-              query_builder += "#{seperator}#{key}=#{value.map { |element| CGI.escape(element.to_s) }.join('\t')}"
-            else
-              query_builder += "#{seperator}#{APIHelper.serialize_array(key, value, formatting: array_serialization).
-                map { |k, v| "#{k}=#{CGI.escape(v.to_s)}" }.join('&')}"
-            end
+            query_builder += if array_serialization == 'csv'
+                               "#{seperator}#{key}=#{value.map do |element|
+                                 CGI.escape(element.to_s)
+                               end.join(',')}"
+                             elsif array_serialization == 'psv'
+                               "#{seperator}#{key}=#{value.map do |element|
+                                 CGI.escape(element.to_s)
+                               end.join('|')}"
+                             elsif array_serialization == 'tsv'
+                               "#{seperator}#{key}=#{value.map do |element|
+                                 CGI.escape(element.to_s)
+                               end.join("\t")}"
+                             else
+                               "#{seperator}#{APIHelper.serialize_array(
+                                 key, value, formatting: array_serialization
+                               ).map { |k, v| "#{k}=#{CGI.escape(v.to_s)}" }
+                               .join('&')}"
+                             end
           else
             query_builder += "#{seperator}#{key}=#{CGI.escape(value.to_s)}"
           end
@@ -84,31 +104,31 @@ module Raas
       query_builder
     end
 
-    # Validates and processes the given Url
-    # @param [String] The given Url to process
-    # @return [String] Pre-processed Url as string
+    # Validates and processes the given Url.
+    # @param [String] The given Url to process.
+    # @return [String] Pre-processed Url as string.
     def self.clean_url(url)
-      # perform parameter validation
+      # Perform parameter validation.
       raise ArgumentError, 'Invalid Url.' unless url.instance_of? String
 
-      # ensure that the urls are absolute
+      # Ensure that the urls are absolute.
       matches = url.match(%r{^(https?:\/\/[^\/]+)})
       raise ArgumentError, 'Invalid Url format.' if matches.nil?
 
-      # get the http protocol match
+      # Get the http protocol match.
       protocol = matches[1]
 
-      # check if parameters exist
+      # Check if parameters exist.
       index = url.index('?')
 
-      # remove redundant forward slashes
+      # Remove redundant forward slashes.
       query = url[protocol.length...(!index.nil? ? index : url.length)]
       query.gsub!(%r{\/\/+}, '/')
 
-      # get the parameters
+      # Get the parameters.
       parameters = !index.nil? ? url[url.index('?')...url.length] : ''
 
-      # return processed url
+      # Return processed url.
       protocol + query + parameters
     end
 
@@ -116,7 +136,7 @@ module Raas
     # @param [String] A JSON string.
     def self.json_deserialize(json)
       return JSON.parse(json)
-    rescue
+    rescue StandardError
       raise TypeError, 'Server responded with invalid JSON.'
     end
 
@@ -132,17 +152,51 @@ module Raas
     def self.form_encode_parameters(form_parameters)
       encoded = {}
       form_parameters.each do |key, value|
-        encoded.merge!(APIHelper.form_encode(value, key))
+        encoded.merge!(APIHelper.form_encode(value, key, formatting:
+          Configuration.array_serialization))
       end
       encoded
+    end
+
+    def self.custom_merge(a, b)
+      x = {}
+      a.each do |key, value_a|
+        b.each do |k, value_b|
+          next unless key == k
+          x[k] = []
+          if value_a.instance_of? Array
+            value_a.each do |v|
+              x[k].push(v)
+            end
+          else
+            x[k].push(value_a)
+          end
+          if value_b.instance_of? Array
+            value_b.each do |v|
+              x[k].push(v)
+            end
+          else
+            x[k].push(value_b)
+          end
+          a.delete(k)
+          b.delete(k)
+        end
+      end
+      x.merge!(a)
+      x.merge!(b)
+      x
     end
 
     # Form encodes an object.
     # @param [Dynamic] An object to form encode.
     # @param [String] The name of the object.
-    # @return [Hash] A form encoded representation of the object in the form of a hash.
-    def self.form_encode(obj, instance_name)
+    # @return [Hash] A form encoded representation of the object in the form
+    # of a hash.
+    def self.form_encode(obj, instance_name, formatting: 'indexed')
       retval = {}
+
+      serializable_types = [String, Numeric, TrueClass,
+                            FalseClass, Date, DateTime]
 
       # If this is a structure, resolve it's field names.
       obj = obj.to_hash if obj.is_a? BaseModel
@@ -151,12 +205,33 @@ module Raas
       if obj.nil?
         nil
       elsif obj.instance_of? Array
-        obj.each_with_index do |value, index|
-          retval.merge!(APIHelper.form_encode(value, instance_name + '[' + index.to_s + ']'))
+        if formatting == 'indexed'
+          obj.each_with_index do |value, index|
+            retval.merge!(APIHelper.form_encode(value, instance_name + '[' +
+              index.to_s + ']'))
+          end
+        elsif serializable_types.map { |x| obj[0].is_a? x }.any?
+          obj.each do |value|
+            abc = if formatting == 'unindexed'
+                    APIHelper.form_encode(value, instance_name + '[]',
+                                          formatting: formatting)
+                  else
+                    APIHelper.form_encode(value, instance_name,
+                                          formatting: formatting)
+                  end
+            retval = APIHelper.custom_merge(retval, abc)
+            # print retval
+          end
+        else
+          obj.each_with_index do |value, index|
+            retval.merge!(APIHelper.form_encode(value, instance_name + '[' +
+              index.to_s + ']', formatting: formatting))
+          end
         end
       elsif obj.instance_of? Hash
         obj.each do |key, value|
-          retval.merge!(APIHelper.form_encode(value, instance_name + '[' + key + ']'))
+          retval.merge!(APIHelper.form_encode(value, instance_name + '[' +
+            key + ']', formatting: formatting))
         end
       else
         retval[instance_name] = obj
@@ -166,16 +241,21 @@ module Raas
   end
 end
 
-# extend types to support to_bool
+# Extend types to support to_bool.
 module ToBoolean
   def to_bool
-    return true if self == true || self.to_s.strip =~ /^(true|yes|y|1)$/i
-    return false
+    return true if self == true || to_s.strip =~ /^(true|yes|y|1)$/i
+    false
   end
 end
 
+# Extend NilClass type to support to_bool.
 class NilClass; include ToBoolean; end
+# Extend TrueClass type to support to_bool.
 class TrueClass; include ToBoolean; end
+# Extend FalseClass type to support to_bool.
 class FalseClass; include ToBoolean; end
+# Extend Numeric type to support to_bool.
 class Numeric; include ToBoolean; end
+# Extend String type to support to_bool.
 class String; include ToBoolean; end

@@ -1,187 +1,218 @@
-# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0 ( https://apimatic.io ).
+# This file was automatically generated for Tango Card, Inc. by APIMATIC v2.0
+# ( https://apimatic.io ).
 
 require 'date'
 module Raas
+  # Represents the response from a get order call
   class OrderModel < BaseModel
-    # Account Identifier
-    # @return [String]
-    attr_accessor :account_identifier
-
-    # Amount Charged
-    # @return [CurrencyBreakdownModel]
-    attr_accessor :amount_charged
-
-    # Created At
-    # @return [DateTime]
-    attr_accessor :created_at
-
-    # Customer Identifier
-    # @return [String]
-    attr_accessor :customer_identifier
-
-    # Denomination
-    # @return [CurrencyBreakdownModel]
-    attr_accessor :denomination
-
-    # Reference Order ID
+    # The reference order id
     # @return [String]
     attr_accessor :reference_order_id
 
-    # Reward
-    # @return [RewardModel]
-    attr_accessor :reward
-
-    # Reward Name
+    # The customer identifier
     # @return [String]
-    attr_accessor :reward_name
+    attr_accessor :customer_identifier
 
-    # Send Email
-    # @return [Boolean]
-    attr_accessor :send_email
-
-    # Status
+    # The account identifier
     # @return [String]
-    attr_accessor :status
+    attr_accessor :account_identifier
 
-    # UTID
+    # The account number
+    # @return [String]
+    attr_accessor :account_number
+
+    # The order's amount information
+    # @return [CurrencyBreakdownModel]
+    attr_accessor :amount_charged
+
+    # Information about the gift card amount
+    # @return [CurrencyBreakdownModel]
+    attr_accessor :denomination
+
+    # The UTID
     # @return [String]
     attr_accessor :utid
 
-    # Campaign
+    # The reward name
     # @return [String]
-    attr_accessor :campaign
+    attr_accessor :reward_name
 
-    # Email Subject
+    # Indicates if an email was sent to the recipient
+    # @return [Boolean]
+    attr_accessor :send_email
+
+    # The order's status
     # @return [String]
-    attr_accessor :email_subject
+    attr_accessor :status
 
-    # External Reference ID
-    # @return [String]
-    attr_accessor :external_ref_id
+    # When the order was placed
+    # @return [DateTime]
+    attr_accessor :created_at
 
-    # Message
-    # @return [String]
-    attr_accessor :message
+    # Contains the reward credentials
+    # @return [RewardModel]
+    attr_accessor :reward
 
-    # Notes
-    # @return [String]
-    attr_accessor :notes
-
-    # Recipient
-    # @return [NameEmailModel]
-    attr_accessor :recipient
-
-    # Sender
+    # The sender data
     # @return [NameEmailModel]
     attr_accessor :sender
 
-    # A mapping from model property names to API property names
+    # The recipient data
+    # @return [NameEmailModel]
+    attr_accessor :recipient
+
+    # The email template id
+    # @return [String]
+    attr_accessor :etid
+
+    # An optional campaign identifier
+    # @return [String]
+    attr_accessor :campaign
+
+    # The subject of the email
+    # @return [String]
+    attr_accessor :email_subject
+
+    # An external reference id
+    # @return [String]
+    attr_accessor :external_ref_id
+
+    # A message included with the email
+    # @return [String]
+    attr_accessor :message
+
+    # Optional customer notes
+    # @return [String]
+    attr_accessor :notes
+
+    # Margin share information
+    # @return [CurrencyBreakdownModel]
+    attr_accessor :margin_share
+
+    # A mapping from model property names to API property names.
     def self.names
-      if @_hash.nil?
-        @_hash = {}
-        @_hash["account_identifier"] = "accountIdentifier"
-        @_hash["amount_charged"] = "amountCharged"
-        @_hash["created_at"] = "createdAt"
-        @_hash["customer_identifier"] = "customerIdentifier"
-        @_hash["denomination"] = "denomination"
-        @_hash["reference_order_id"] = "referenceOrderID"
-        @_hash["reward"] = "reward"
-        @_hash["reward_name"] = "rewardName"
-        @_hash["send_email"] = "sendEmail"
-        @_hash["status"] = "status"
-        @_hash["utid"] = "utid"
-        @_hash["campaign"] = "campaign"
-        @_hash["email_subject"] = "emailSubject"
-        @_hash["external_ref_id"] = "externalRefID"
-        @_hash["message"] = "message"
-        @_hash["notes"] = "notes"
-        @_hash["recipient"] = "recipient"
-        @_hash["sender"] = "sender"
-      end
+      @_hash = {} if @_hash.nil?
+      @_hash['reference_order_id'] = 'referenceOrderID'
+      @_hash['customer_identifier'] = 'customerIdentifier'
+      @_hash['account_identifier'] = 'accountIdentifier'
+      @_hash['account_number'] = 'accountNumber'
+      @_hash['amount_charged'] = 'amountCharged'
+      @_hash['denomination'] = 'denomination'
+      @_hash['utid'] = 'utid'
+      @_hash['reward_name'] = 'rewardName'
+      @_hash['send_email'] = 'sendEmail'
+      @_hash['status'] = 'status'
+      @_hash['created_at'] = 'createdAt'
+      @_hash['reward'] = 'reward'
+      @_hash['sender'] = 'sender'
+      @_hash['recipient'] = 'recipient'
+      @_hash['etid'] = 'etid'
+      @_hash['campaign'] = 'campaign'
+      @_hash['email_subject'] = 'emailSubject'
+      @_hash['external_ref_id'] = 'externalRefID'
+      @_hash['message'] = 'message'
+      @_hash['notes'] = 'notes'
+      @_hash['margin_share'] = 'marginShare'
       @_hash
     end
 
-    def initialize(account_identifier = nil,
-                   amount_charged = nil,
-                   created_at = nil,
+    def initialize(reference_order_id = nil,
                    customer_identifier = nil,
+                   account_identifier = nil,
+                   account_number = nil,
+                   amount_charged = nil,
                    denomination = nil,
-                   reference_order_id = nil,
-                   reward = nil,
+                   utid = nil,
                    reward_name = nil,
                    send_email = nil,
                    status = nil,
-                   utid = nil,
+                   created_at = nil,
+                   reward = nil,
+                   sender = nil,
+                   recipient = nil,
+                   etid = nil,
                    campaign = nil,
                    email_subject = nil,
                    external_ref_id = nil,
                    message = nil,
                    notes = nil,
-                   recipient = nil,
-                   sender = nil)
-      @account_identifier = account_identifier
-      @amount_charged = amount_charged
-      @created_at = created_at
-      @customer_identifier = customer_identifier
-      @denomination = denomination
+                   margin_share = nil)
       @reference_order_id = reference_order_id
-      @reward = reward
+      @customer_identifier = customer_identifier
+      @account_identifier = account_identifier
+      @account_number = account_number
+      @amount_charged = amount_charged
+      @denomination = denomination
+      @utid = utid
       @reward_name = reward_name
       @send_email = send_email
       @status = status
-      @utid = utid
+      @created_at = created_at
+      @reward = reward
+      @sender = sender
+      @recipient = recipient
+      @etid = etid
       @campaign = campaign
       @email_subject = email_subject
       @external_ref_id = external_ref_id
       @message = message
       @notes = notes
-      @recipient = recipient
-      @sender = sender
+      @margin_share = margin_share
     end
 
-    # Creates an instance of the object from a hash
+    # Creates an instance of the object from a hash.
     def self.from_hash(hash)
       return nil unless hash
 
-      # Extract variables from the hash
-      account_identifier = hash['accountIdentifier']
-      amount_charged = CurrencyBreakdownModel.from_hash(hash['amountCharged']) if hash['amountCharged']
-      created_at = DateTime.rfc3339(hash['createdAt']) if hash['createdAt']
-      customer_identifier = hash['customerIdentifier']
-      denomination = CurrencyBreakdownModel.from_hash(hash['denomination']) if hash['denomination']
+      # Extract variables from the hash.
       reference_order_id = hash['referenceOrderID']
-      reward = RewardModel.from_hash(hash['reward']) if hash['reward']
+      customer_identifier = hash['customerIdentifier']
+      account_identifier = hash['accountIdentifier']
+      account_number = hash['accountNumber']
+      amount_charged = CurrencyBreakdownModel.from_hash(hash['amountCharged']) if
+        hash['amountCharged']
+      denomination = CurrencyBreakdownModel.from_hash(hash['denomination']) if
+        hash['denomination']
+      utid = hash['utid']
       reward_name = hash['rewardName']
       send_email = hash['sendEmail']
       status = hash['status']
-      utid = hash['utid']
+      created_at = DateTime.rfc3339(hash['createdAt']) if hash['createdAt']
+      reward = RewardModel.from_hash(hash['reward']) if hash['reward']
+      sender = NameEmailModel.from_hash(hash['sender']) if hash['sender']
+      recipient = NameEmailModel.from_hash(hash['recipient']) if
+        hash['recipient']
+      etid = hash['etid']
       campaign = hash['campaign']
       email_subject = hash['emailSubject']
       external_ref_id = hash['externalRefID']
       message = hash['message']
       notes = hash['notes']
-      recipient = NameEmailModel.from_hash(hash['recipient']) if hash['recipient']
-      sender = NameEmailModel.from_hash(hash['sender']) if hash['sender']
+      margin_share = CurrencyBreakdownModel.from_hash(hash['marginShare']) if
+        hash['marginShare']
 
-      # Create object from extracted values
-      OrderModel.new(account_identifier,
-                     amount_charged,
-                     created_at,
+      # Create object from extracted values.
+      OrderModel.new(reference_order_id,
                      customer_identifier,
+                     account_identifier,
+                     account_number,
+                     amount_charged,
                      denomination,
-                     reference_order_id,
-                     reward,
+                     utid,
                      reward_name,
                      send_email,
                      status,
-                     utid,
+                     created_at,
+                     reward,
+                     sender,
+                     recipient,
+                     etid,
                      campaign,
                      email_subject,
                      external_ref_id,
                      message,
                      notes,
-                     recipient,
-                     sender)
+                     margin_share)
     end
   end
 end
