@@ -29,19 +29,19 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for get_accounts_by_customer.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/customers/{customerIdentifier}/accounts'
+        _query_builder += '/customers/{customerIdentifier}/accounts'
         _query_builder = APIHelper.append_url_with_template_parameters(
           _query_builder,
           'customerIdentifier' => customer_identifier
         )
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for get_accounts_by_customer.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for get_accounts_by_customer.')
         _request = @http_client.get(
@@ -50,7 +50,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'get_accounts_by_customer')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for get_accounts_by_customer.")
         unless _context.response.status_code.between?(200, 208)
@@ -60,7 +60,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for get_accounts_by_customer.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -90,20 +90,20 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for create_account.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/customers/{customerIdentifier}/accounts'
+        _query_builder += '/customers/{customerIdentifier}/accounts'
         _query_builder = APIHelper.append_url_with_template_parameters(
           _query_builder,
           'customerIdentifier' => customer_identifier
         )
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for create_account.")
         _headers = {
           'accept' => 'application/json',
           'content-type' => 'application/json; charset=utf-8'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for create_account.')
         _request = @http_client.post(
@@ -113,7 +113,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'create_account')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for create_account.")
         unless _context.response.status_code.between?(200, 208)
@@ -123,7 +123,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for create_account.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -143,15 +143,15 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for get_all_accounts.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/accounts'
+        _query_builder += '/accounts'
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for get_all_accounts.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for get_all_accounts.')
         _request = @http_client.get(
@@ -160,7 +160,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'get_all_accounts')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for get_all_accounts.")
         unless _context.response.status_code.between?(200, 208)
@@ -170,7 +170,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for get_all_accounts.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -197,19 +197,19 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for get_account.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/accounts/{accountIdentifier}'
+        _query_builder += '/accounts/{accountIdentifier}'
         _query_builder = APIHelper.append_url_with_template_parameters(
           _query_builder,
           'accountIdentifier' => account_identifier
         )
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for get_account.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for get_account.')
         _request = @http_client.get(
@@ -218,7 +218,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'get_account')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for get_account.")
         unless _context.response.status_code.between?(200, 208)
@@ -228,7 +228,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for get_account.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)

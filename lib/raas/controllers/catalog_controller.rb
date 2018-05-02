@@ -22,15 +22,15 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for get_catalog.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/catalogs'
+        _query_builder += '/catalogs'
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for get_catalog.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for get_catalog.')
         _request = @http_client.get(
@@ -39,7 +39,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'get_catalog')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for get_catalog.")
         unless _context.response.status_code.between?(200, 208)
@@ -49,7 +49,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for get_catalog.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)

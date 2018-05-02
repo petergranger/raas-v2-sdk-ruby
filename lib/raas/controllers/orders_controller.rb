@@ -29,19 +29,19 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for get_order.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/orders/{referenceOrderID}'
+        _query_builder += '/orders/{referenceOrderID}'
         _query_builder = APIHelper.append_url_with_template_parameters(
           _query_builder,
           'referenceOrderID' => reference_order_id
         )
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for get_order.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for get_order.')
         _request = @http_client.get(
@@ -50,7 +50,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'get_order')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for get_order.")
         unless _context.response.status_code.between?(200, 208)
@@ -60,7 +60,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for get_order.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -87,19 +87,19 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for create_resend_order.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/orders/{referenceOrderID}/resends'
+        _query_builder += '/orders/{referenceOrderID}/resends'
         _query_builder = APIHelper.append_url_with_template_parameters(
           _query_builder,
           'referenceOrderID' => reference_order_id
         )
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for create_resend_order.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for create_resend_order.')
         _request = @http_client.post(
@@ -108,7 +108,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'create_resend_order')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for create_resend_order.")
         unless _context.response.status_code.between?(200, 208)
@@ -118,7 +118,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for create_resend_order.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -149,7 +149,7 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for get_orders.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/orders'
+        _query_builder += '/orders'
         _query_builder = APIHelper.append_url_with_query_parameters(
           _query_builder,
           {
@@ -164,13 +164,13 @@ module Raas
           array_serialization: Configuration.array_serialization
         )
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for get_orders.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for get_orders.')
         _request = @http_client.get(
@@ -179,7 +179,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'get_orders')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for get_orders.")
         unless _context.response.status_code.between?(200, 208)
@@ -189,7 +189,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for get_orders.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -216,16 +216,16 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for create_order.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/orders'
+        _query_builder += '/orders'
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for create_order.")
         _headers = {
           'accept' => 'application/json',
           'content-type' => 'application/json; charset=utf-8'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for create_order.')
         _request = @http_client.post(
@@ -235,7 +235,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'create_order')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for create_order.")
         unless _context.response.status_code.between?(200, 208)
@@ -245,7 +245,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for create_order.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)

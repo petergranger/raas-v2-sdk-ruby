@@ -29,16 +29,16 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for create_customer.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/customers'
+        _query_builder += '/customers'
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for create_customer.")
         _headers = {
           'accept' => 'application/json',
           'content-type' => 'application/json; charset=utf-8'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for create_customer.')
         _request = @http_client.post(
@@ -48,7 +48,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'create_customer')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for create_customer.")
         unless _context.response.status_code.between?(200, 208)
@@ -58,7 +58,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for create_customer.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -78,15 +78,15 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for get_all_customers.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/customers'
+        _query_builder +='/customers'
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for get_all_customers.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for get_all_customers.')
         _request = @http_client.get(
@@ -95,7 +95,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'get_all_customers')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for get_all_customers.")
         unless _context.response.status_code.between?(200, 208)
@@ -105,7 +105,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for get_all_customers.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -132,19 +132,19 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for get_customer.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/customers/{customerIdentifier}'
+        _query_builder += '/customers/{customerIdentifier}'
         _query_builder = APIHelper.append_url_with_template_parameters(
           _query_builder,
           'customerIdentifier' => customer_identifier
         )
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for get_customer.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for get_customer.')
         _request = @http_client.get(
@@ -153,7 +153,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'get_customer')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for get_customer.")
         unless _context.response.status_code.between?(200, 208)
@@ -163,7 +163,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for get_customer.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)

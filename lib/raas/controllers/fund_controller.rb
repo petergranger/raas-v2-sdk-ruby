@@ -29,16 +29,16 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for create_unregister_credit_card.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/creditCardUnregisters'
+        _query_builder += '/creditCardUnregisters'
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for create_unregister_credit_card.")
         _headers = {
           'accept' => 'application/json',
           'content-type' => 'application/json; charset=utf-8'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for create_unregister_credit_card.')
         _request = @http_client.post(
@@ -48,7 +48,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'create_unregister_credit_card')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for create_unregister_credit_card.")
         unless _context.response.status_code.between?(200, 208)
@@ -58,7 +58,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for create_unregister_credit_card.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -84,19 +84,19 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for get_deposit.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/creditCardDeposits/{depositId}'
+        _query_builder += '/creditCardDeposits/{depositId}'
         _query_builder = APIHelper.append_url_with_template_parameters(
           _query_builder,
           'depositId' => deposit_id
         )
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for get_deposit.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for get_deposit.')
         _request = @http_client.get(
@@ -105,7 +105,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'get_deposit')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for get_deposit.")
         unless _context.response.status_code.between?(200, 208)
@@ -115,7 +115,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for get_deposit.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -141,16 +141,16 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for add_funds.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/creditCardDeposits'
+        _query_builder += '/creditCardDeposits'
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for add_funds.")
         _headers = {
           'accept' => 'application/json',
           'content-type' => 'application/json; charset=utf-8'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for add_funds.')
         _request = @http_client.post(
@@ -160,7 +160,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'add_funds')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for add_funds.")
         unless _context.response.status_code.between?(200, 208)
@@ -170,7 +170,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for add_funds.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -190,15 +190,15 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for get_credit_cards.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/creditCards'
+        _query_builder += '/creditCards'
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for get_credit_cards.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for get_credit_cards.')
         _request = @http_client.get(
@@ -207,7 +207,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'get_credit_cards')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for get_credit_cards.")
         unless _context.response.status_code.between?(200, 208)
@@ -217,7 +217,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for get_credit_cards.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -243,19 +243,19 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for get_credit_card.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/creditCards/{token}'
+        _query_builder += '/creditCards/{token}'
         _query_builder = APIHelper.append_url_with_template_parameters(
           _query_builder,
           'token' => token
         )
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for get_credit_card.")
         _headers = {
           'accept' => 'application/json'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for get_credit_card.')
         _request = @http_client.get(
@@ -264,7 +264,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'get_credit_card')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for get_credit_card.")
         unless _context.response.status_code.between?(200, 208)
@@ -274,7 +274,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for get_credit_card.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
@@ -301,16 +301,16 @@ module Raas
         # Prepare query url.
         @logger.info("Preparing query URL for create_register_credit_card.")
         _query_builder = Configuration.get_base_uri
-        _query_builder << '/creditCards'
+        _query_builder += '/creditCards'
         _query_url = APIHelper.clean_url _query_builder
-  
+
         # Prepare headers.
         @logger.info("Preparing headers for create_register_credit_card.")
         _headers = {
           'accept' => 'application/json',
           'content-type' => 'application/json; charset=utf-8'
         }
-  
+
         # Prepare and execute HttpRequest.
         @logger.info('Preparing and executing HttpRequest for create_register_credit_card.')
         _request = @http_client.post(
@@ -320,7 +320,7 @@ module Raas
         )
         BasicAuth.apply(_request)
         _context = execute_request(_request, name: 'create_register_credit_card')
-  
+
         # Validate response against endpoint and global error codes.
         @logger.info("Validating response for create_register_credit_card.")
         unless _context.response.status_code.between?(200, 208)
@@ -330,7 +330,7 @@ module Raas
           )
         end
         validate_response(_context)
-  
+
         # Return appropriate response type.
         @logger.info("Returning response for create_register_credit_card.")
         decoded = APIHelper.json_deserialize(_context.response.raw_body)
